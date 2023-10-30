@@ -22,7 +22,6 @@ async def main():
   articles = api_response['apiResults']
 
   for article in articles:
-    print(article['date'])
     article_date = convert_to_iso8601(article["date"])
     if most_recent_article_date == None or article_date>most_recent_article_date:
       most_recent_article_date = article_date
@@ -77,13 +76,13 @@ def convert_to_iso8601(input_string):
 
 
 def get_data_status():
-  with open('server_document_status.json',"r",encoding='utf-8') as f:
+  with open(str(os.path.dirname(__file__))+ '/server_document_status.json',"r",encoding='utf-8') as f:
     status = json.loads(f.read())
   return status['mostRecentDate'], status['mostRecentUrl']
    
 
 def persist_data_status(most_recent_article_date, most_recent_article_url):
-  with open('server_document_status.json',"w",encoding='utf-8') as f:
+  with open(str(os.path.dirname(__file__))+ '/server_document_status.json',"w",encoding='utf-8') as f:
     status_json = json.dumps({
       "mostRecentDate": most_recent_article_date,
       "mostRecentUrl": most_recent_article_url
