@@ -65,9 +65,7 @@ async def main():
    
   fiass_index.storage_context.persist("./faiss_vector_store")
 
-  print(json.dumps({
-    "mostRecentDate": most_recent_article_date
-  }))
+  print(most_recent_article_date)
 
   
 
